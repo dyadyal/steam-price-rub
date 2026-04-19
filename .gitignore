@@ -1,26 +1,7 @@
-# Ignore files
-node_modules/
+# OS
 .DS_Store
-*.log
-.vscode/
+Thumbs.db
+
+# Editors
 .idea/
-*.pem
-*.key
-dist/
-build/
-*.zip
-*.crx
-
-# IDE
-*.swp
-*.swo
-*~
-.vim/
-
-# Testing
-.nyc_output/
-coverage/
-
-# Dependencies
-package-lock.json
-yarn.lock
+.vscode/

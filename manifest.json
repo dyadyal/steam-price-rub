@@ -1,33 +1,20 @@
 {
   "manifest_version": 3,
-  "name": "Steam Price RUB",
+  "name": "Steam RUB",
   "version": "1.0.0",
-  "description": "Конвертирует цены в Steam в русские рубли",
-  "permissions": [
-    "scripting",
-    "activeTab"
-  ],
-  "host_permissions": [
-    "https://steampowered.com/*",
-    "https://*.steampowered.com/*",
-    "https://api.exchangerate-api.com/*"
-  ],
+  "description": "Adds ruble prices next to Steam prices on store.steampowered.com.",
   "content_scripts": [
     {
       "matches": [
-        "https://steampowered.com/*",
-        "https://*.steampowered.com/*"
+        "https://store.steampowered.com/*"
       ],
-      "js": ["content.js"],
-      "run_at": "document_end"
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_idle"
     }
   ],
-  "action": {
-    "default_popup": "popup.html",
-    "default_scripts": ["popup.js"],
-    "default_title": "Steam Price RUB"
-  },
-  "background": {
-    "service_worker": "background.js"
-  }
+  "host_permissions": [
+    "https://store.steampowered.com/*"
+  ]
 }

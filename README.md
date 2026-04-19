@@ -53,13 +53,12 @@ steam-price-rub/
 ├── manifest.json
 ├── content.js
 ├── index.html
-├── README.md
-└── _config.yml
+└── README.md
 ```
 
 ## GitHub Pages
 
-В проекте есть `index.html` и `_config.yml`, поэтому репозиторий можно использовать и как простую страницу на GitHub Pages.
+В проекте есть `index.html`, поэтому репозиторий можно использовать и как простую страницу на GitHub Pages.
 
 ## Ограничения
 

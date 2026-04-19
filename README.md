@@ -1,21 +1,23 @@
 # Steam RUB
 
-Minimal Chrome extension that scans the current page on `store.steampowered.com`, finds prices in Ukrainian hryvnia, and adds the converted ruble value next to them.
+Минимальное Chrome-расширение для `store.steampowered.com`.
 
-Example:
+Расширение сканирует текст на открытой странице, находит цены в гривне и добавляет рядом цену в рублях.
+
+Пример:
 
 ```text
 33₴ -> 33₴ (73 ₽)
 ```
 
-## Features
+## Возможности
 
-- Minimal project structure
-- Works on `store.steampowered.com`
-- Scans visible page text
-- Converts `₴` prices to `₽`
+- минимальная структура проекта
+- работа на `store.steampowered.com`
+- сканирование текста на текущей странице
+- конвертация `₴` в `₽`
 
-## Project Files
+## Структура проекта
 
 ```text
 steam-price-rub/
@@ -24,21 +26,22 @@ steam-price-rub/
 └── README.md
 ```
 
-## Installation
+## Установка
 
-1. Open `chrome://extensions`
-2. Enable Developer mode
-3. Click `Load unpacked`
-4. Select this project folder
+1. Откройте `chrome://extensions`
+2. Включите режим разработчика
+3. Нажмите `Загрузить распакованное расширение`
+4. Выберите папку проекта
 
-## Current Logic
+## Как это работает
 
-- The extension looks for prices in the format `33₴`
-- The conversion uses a fixed rate: `1 UAH = 2.2 RUB`
-- The original price is preserved, and the ruble value is appended next to it
+- расширение ищет цены в формате `33₴`
+- используется фиксированный курс: `1 UAH = 2.2 RUB`
+- исходная цена сохраняется
+- рядом дописывается сумма в рублях
 
-## Notes
+## Ограничения
 
-- This is a simple MVP
-- The exchange rate is currently hardcoded
-- Only the `₴` currency is supported right now
+- это простая MVP-версия
+- курс пока задан в коде
+- сейчас поддерживается только символ `₴`

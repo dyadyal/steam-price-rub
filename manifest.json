@@ -1,8 +1,11 @@
 {
   "manifest_version": 3,
   "name": "Steam RUB",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Adds ruble prices next to Steam prices on store.steampowered.com.",
+  "permissions": [
+    "storage"
+  ],
   "content_scripts": [
     {
       "matches": [
@@ -15,6 +18,7 @@
     }
   ],
   "host_permissions": [
-    "https://store.steampowered.com/*"
+    "https://store.steampowered.com/*",
+    "https://open.er-api.com/*"
   ]
 }

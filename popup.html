@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Steam Price RUB</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      width: 350px;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: #1a1a1a;
+      color: #e0e0e0;
+      padding: 16px;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 20px;
+      border-bottom: 2px solid #1a9fff;
+      padding-bottom: 12px;
+    }
+
+    .header h1 {
+      font-size: 18px;
+      color: #1a9fff;
+      margin-bottom: 4px;
+    }
+
+    .header p {
+      font-size: 12px;
+      color: #888;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .stat-item {
+      background: #2a2a2a;
+      padding: 12px;
+      border-radius: 6px;
+      text-align: center;
+      border: 1px solid #404040;
+    }
+
+    .stat-label {
+      font-size: 11px;
+      color: #888;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .stat-value {
+      font-size: 18px;
+      font-weight: bold;
+      color: #1a9fff;
+    }
+
+    .controls {
+      margin-bottom: 16px;
+    }
+
+    .button {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 8px;
+      background: #1a9fff;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 500;
+      transition: background 0.2s;
+    }
+
+    .button:hover {
+      background: #1581d4;
+    }
+
+    .button.secondary {
+      background: #2a2a2a;
+      color: #1a9fff;
+      border: 1px solid #1a9fff;
+    }
+
+    .button.secondary:hover {
+      background: #333333;
+    }
+
+    .settings {
+      background: #2a2a2a;
+      padding: 12px;
+      border-radius: 6px;
+      border: 1px solid #404040;
+      margin-bottom: 16px;
+    }
+
+    .setting-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+      font-size: 13px;
+    }
+
+    .setting-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .toggle {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    input[type="checkbox"] {
+      cursor: pointer;
+    }
+
+    .info {
+      background: #1a2a3a;
+      padding: 12px;
+      border-radius: 6px;
+      border-left: 3px solid #1a9fff;
+      font-size: 12px;
+      line-height: 1.5;
+      color: #aaa;
+      margin-bottom: 16px;
+    }
+
+    .footer {
+      text-align: center;
+      font-size: 11px;
+      color: #666;
+      border-top: 1px solid #404040;
+      padding-top: 12px;
+    }
+
+    .status {
+      padding: 8px 12px;
+      background: #2a4a2a;
+      color: #4cd964;
+      border-radius: 4px;
+      font-size: 12px;
+      margin-bottom: 12px;
+      text-align: center;
+      display: none;
+    }
+
+    .status.show {
+      display: block;
+    }
+
+    .status.error {
+      background: #4a2a2a;
+      color: #ff453a;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>💰 Steam Price RUB</h1>
+    <p>Конвертер цен в рубли</p>
+  </div>
+
+  <div id="status" class="status"></div>
+
+  <div class="stats">
+    <div class="stat-item">
+      <div class="stat-label">Курс USD/RUB</div>
+      <div class="stat-value" id="exchangeRate">-</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-label">Обновлено</div>
+      <div class="stat-value" id="lastUpdate">-</div>
+    </div>
+  </div>
+
+  <div class="info">
+    ✓ Конвертирует цены на всех страницах Steam (игры, скидки, внутриигровой магазин)<br>
+    ✓ Курс обновляется каждые 30 минут<br>
+    ✓ Работает автоматически
+  </div>
+
+  <div class="controls">
+    <button id="updateNowBtn" class="button">Обновить курс сейчас</button>
+    <button id="settingsBtn" class="button secondary">Параметры</button>
+  </div>
+
+  <div id="settings" class="settings" style="display: none;">
+    <div class="setting-item">
+      <label>Показывать конвертацию</label>
+      <div class="toggle">
+        <input type="checkbox" id="enableToggle" checked>
+      </div>
+    </div>
+    <div class="setting-item">
+      <label>Только скидки</label>
+      <div class="toggle">
+        <input type="checkbox" id="onlySalesToggle">
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    v1.0.0 | Powered by ExchangeRate-API
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

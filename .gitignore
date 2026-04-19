@@ -1,0 +1,26 @@
+# Ignore files
+node_modules/
+.DS_Store
+*.log
+.vscode/
+.idea/
+*.pem
+*.key
+dist/
+build/
+*.zip
+*.crx
+
+# IDE
+*.swp
+*.swo
+*~
+.vim/
+
+# Testing
+.nyc_output/
+coverage/
+
+# Dependencies
+package-lock.json
+yarn.lock

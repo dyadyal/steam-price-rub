@@ -14,15 +14,17 @@ const DEFAULT_RUB_RATES = {
   CNY: 14
 };
 
+const AMOUNT_PART = "\\d+(?:[\\s\\u00a0\\u202f]\\d{3})*(?:[.,]\\d{1,2})?";
+
 const CURRENCY_PATTERNS = [
-  { code: "UAH", regex: /(\d+(?:[.,]\d{1,2})?)\s*\u20b4/g },
-  { code: "USD", regex: /\$\s*(\d+(?:[.,]\d{1,2})?)/g },
-  { code: "EUR", regex: /\u20ac\s*(\d+(?:[.,]\d{1,2})?)|(\d+(?:[.,]\d{1,2})?)\s*\u20ac/g },
-  { code: "GBP", regex: /\u00a3\s*(\d+(?:[.,]\d{1,2})?)/g },
-  { code: "KZT", regex: /(\d+(?:[.,]\d{1,2})?)\s*\u20b8/g },
-  { code: "PLN", regex: /(\d+(?:[.,]\d{1,2})?)\s*(?:z\u0142|PLN)/gi },
-  { code: "TRY", regex: /(\d+(?:[.,]\d{1,2})?)\s*\u20ba|\u20ba\s*(\d+(?:[.,]\d{1,2})?)/g },
-  { code: "CNY", regex: /\u00a5\s*(\d+(?:[.,]\d{1,2})?)|(\d+(?:[.,]\d{1,2})?)\s*\u00a5/g }
+  { code: "UAH", regex: new RegExp(`(${AMOUNT_PART})\\s*\\u20b4`, "g") },
+  { code: "USD", regex: new RegExp(`\\$\\s*(${AMOUNT_PART})`, "g") },
+  { code: "EUR", regex: new RegExp(`\\u20ac\\s*(${AMOUNT_PART})|(${AMOUNT_PART})\\s*\\u20ac`, "g") },
+  { code: "GBP", regex: new RegExp(`\\u00a3\\s*(${AMOUNT_PART})`, "g") },
+  { code: "KZT", regex: new RegExp(`(${AMOUNT_PART})\\s*\\u20b8`, "g") },
+  { code: "PLN", regex: new RegExp(`(${AMOUNT_PART})\\s*(?:z\\u0142|PLN)`, "gi") },
+  { code: "TRY", regex: new RegExp(`(${AMOUNT_PART})\\s*\\u20ba|\\u20ba\\s*(${AMOUNT_PART})`, "g") },
+  { code: "CNY", regex: new RegExp(`\\u00a5\\s*(${AMOUNT_PART})|(${AMOUNT_PART})\\s*\\u00a5`, "g") }
 ];
 
 let rubRates = { ...DEFAULT_RUB_RATES };
@@ -98,6 +100,14 @@ function formatRub(value) {
   return `${Math.round(value).toLocaleString("ru-RU")} ${RUB_SYMBOL}`;
 }
 
+function parseLocalizedAmount(rawAmount) {
+  const normalizedAmount = rawAmount
+    .replace(/[\s\u00a0\u202f]/g, "")
+    .replace(",", ".");
+
+  return Number.parseFloat(normalizedAmount);
+}
+
 function replacePattern(text, pattern, currencyCode) {
   const rate = rubRates[currencyCode];
   if (!rate) {
@@ -117,7 +127,7 @@ function replacePattern(text, pattern, currencyCode) {
       return match;
     }
 
-    const numericValue = Number.parseFloat(rawAmount.replace(",", "."));
+    const numericValue = parseLocalizedAmount(rawAmount);
     if (!Number.isFinite(numericValue)) {
       return match;
     }

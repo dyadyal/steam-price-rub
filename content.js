@@ -160,13 +160,17 @@ function hasSupportedCurrency(text) {
   return /[\u20b4$\u20ac\u00a3\u20b8\u20ba\u00a5]|PLN|z\u0142/i.test(text);
 }
 
+function hasRubConversion(text) {
+  return /\(\d[\d\s\u00a0\u202f]*\s\u20bd\)/.test(text);
+}
+
 function processTextNode(node) {
   if (!node || shouldSkipNode(node)) {
     return;
   }
 
   const sourceText = node.textContent || "";
-  if (!hasSupportedCurrency(sourceText)) {
+  if (!hasSupportedCurrency(sourceText) || hasRubConversion(sourceText)) {
     return;
   }
 
